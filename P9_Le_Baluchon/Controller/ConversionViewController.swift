@@ -39,6 +39,11 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         updateResultLabelText()
     }
 
+    @IBAction func ConversionButton(_ sender: Any) {
+        upTextField.resignFirstResponder()
+        updateResultLabelText()
+    }
+
     private func updateResultLabelText() {
         let euroNumber: Double = ConversionService.shared.stringToDouble(textToTransform: upTextField.text!)
 
@@ -52,19 +57,3 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
 
 
 }
-
-//extension ConversionViewController: UIPickerViewDataSource, UIDocumentPickerDelegate {
-//
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return currencyList.count
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return currencyList[row]
-//    }
-//
-//}

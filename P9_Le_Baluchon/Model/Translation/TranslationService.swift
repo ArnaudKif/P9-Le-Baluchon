@@ -25,8 +25,10 @@ class TranslationService {
     } // end of sendAlertNotification
 
 
-    func getTranslation(textToTranslate: String, callback: @escaping (Bool, Translation?) -> Void) {
-        let resquest = createTranslationRequest(text: textToTranslate)
+    func getTranslation(languageIndex: Int,textToTranslate: String, callback: @escaping (Bool, Translation?) -> Void) {
+
+        let language = selectedLanguage(index: languageIndex)
+        let resquest = createTranslationRequest(target: language, text: textToTranslate)
         task?.cancel()
         task = translationSession.dataTask(with: resquest) { (data, response, error) in
             DispatchQueue.main.async {
@@ -58,13 +60,13 @@ class TranslationService {
         task?.resume()
     } // end of func Gettranslation
 
-    private func translateURL(textToTranslate: String) -> URL {
+    private func translateURL(target: String,textToTranslate: String) -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "translation.googleapis.com"
         urlComponents.path = "/language/translate/v2"
         urlComponents.queryItems = [
-            URLQueryItem(name: "target", value: "en"),
+            URLQueryItem(name: "target", value: "\(target)"),
             URLQueryItem(name: "key", value: "\(googleApiIdKey)"),
             URLQueryItem(name: "q", value: "\(textToTranslate)")
         ]
@@ -74,10 +76,32 @@ class TranslationService {
         return url
     } // end of func translateURL
 
-    private func createTranslationRequest(text: String) -> URLRequest {
-        var request = URLRequest(url: translateURL(textToTranslate: text))
+    private func createTranslationRequest(target: String, text: String) -> URLRequest {
+        var request = URLRequest(url: translateURL(target: target, textToTranslate: text))
         request.httpMethod = "POST"
         return request
     } // end of func createTranslationRequest
+
+    private func selectedLanguage(index: Int) -> String {
+        let language: String
+        switch index {
+        case 0 :
+            language = "en"
+            return language
+        case 1 :
+            language = "fr"
+            return language
+        case 2 :
+        language = "de"
+            return language
+        case 3 :
+            language = "es"
+            return language
+        default:
+            sendAlertNotification(message: "erreur dans le choix de la langue")
+        return "en"
+        }
+
+    }
 
 } // end of class TranslationService

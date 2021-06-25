@@ -19,3 +19,9 @@ struct Infos: Codable {
     let translatedText: String
     let detectedSourceLanguage: String
 } // end of struct Infos
+
+let translateLanguage = ["Anglais",
+                         "Français",
+                         "Allemand",
+                         "Espagnol"
+                        ]

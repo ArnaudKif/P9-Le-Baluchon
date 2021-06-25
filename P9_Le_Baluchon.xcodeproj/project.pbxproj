@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9675C6A82681C6A0002B5471 /* currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9675C6A72681C6A0002B5471 /* currency.swift */; };
 		9677ED6F2679D2E3003D814C /* TranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9677ED6E2679D2E3003D814C /* TranslationViewController.swift */; };
 		9677ED712679D2FF003D814C /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9677ED702679D2FF003D814C /* WeatherViewController.swift */; };
 		9677ED732679D316003D814C /* ConversionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9677ED722679D316003D814C /* ConversionViewController.swift */; };
@@ -46,7 +45,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9675C6A72681C6A0002B5471 /* currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = currency.swift; sourceTree = "<group>"; };
 		9677ED6E2679D2E3003D814C /* TranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationViewController.swift; sourceTree = "<group>"; };
 		9677ED702679D2FF003D814C /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		9677ED722679D316003D814C /* ConversionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionViewController.swift; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 			children = (
 				96F8B80C2680F4DA004210E0 /* Conversion.swift */,
 				96F8B80E2680F4E6004210E0 /* ConversionService.swift */,
-				9675C6A72681C6A0002B5471 /* currency.swift */,
 			);
 			path = Conversion;
 			sourceTree = "<group>";
@@ -364,7 +361,6 @@
 				96F8B8092680F4B8004210E0 /* Translation.swift in Sources */,
 				9677ED712679D2FF003D814C /* WeatherViewController.swift in Sources */,
 				9677ED6F2679D2E3003D814C /* TranslationViewController.swift in Sources */,
-				9675C6A82681C6A0002B5471 /* currency.swift in Sources */,
 				96C0200626789C6200380EE9 /* AppDelegate.swift in Sources */,
 				96C0200826789C6200380EE9 /* SceneDelegate.swift in Sources */,
 				9677ED75267A2F5C003D814C /* Weather.swift in Sources */,

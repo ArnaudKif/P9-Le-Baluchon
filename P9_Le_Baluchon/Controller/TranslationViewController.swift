@@ -21,14 +21,13 @@ class TranslationViewController: UIViewController, UITextFieldDelegate {
 
     }
     
-    @IBAction func dissmisKeyboard(_ sender: UITapGestureRecognizer) {
+
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         textToTranslate.resignFirstResponder()
-        translateButtonTaped()
     }
 
     internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textToTranslate.resignFirstResponder()
-        translateButtonTaped()
         return true
     } // end of textFieldShouldReturn
 
@@ -39,12 +38,29 @@ class TranslationViewController: UIViewController, UITextFieldDelegate {
 
     private func translateButtonTaped() {
         let text = textToTranslate.text!
-        TranslationService.shared.getTranslation(textToTranslate: text) { (true, traductedResponse) in
+        let index = LanguagepickerView.selectedRow(inComponent: 0)
+
+        TranslationService.shared.getTranslation(languageIndex: index , textToTranslate: text) { (true, traductedResponse) in
             self.translatedText.text = traductedResponse?.data.translations[0].translatedText
 
         }
 
     }
 
+}
+
+extension TranslationViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return translateLanguage.count
+    }
+
+    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return translateLanguage[row]
+    }
 
 }
