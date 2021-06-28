@@ -29,6 +29,7 @@
                                         <color key="backgroundColor" red="0.84977561239999999" green="0.99393063780000002" blue="0.76805526020000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="GGq-UP-RqZ"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="PRb-70-tl8"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Trebuchet-BoldItalic" family="Trebuchet MS" pointSize="30"/>
                                         <state key="normal" title="Traduire vers :">
@@ -48,6 +49,7 @@
                                     </pickerView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="cD1-bJ-1zT" firstAttribute="centerX" secondItem="ght-23-ww6" secondAttribute="centerX" id="Acb-Hs-vje"/>
                                     <constraint firstAttribute="height" constant="200" id="Ia2-Rx-Gls"/>
                                 </constraints>
                             </stackView>
@@ -81,15 +83,23 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="mxC-0k-9UJ"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="HXf-Qt-cik">
+                                <rect key="frame" x="195.66666666666666" y="589" width="37" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="a84-YK-qjs"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ezl-LY-kUr"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="JNt-KL-yBq" firstAttribute="leading" secondItem="ght-23-ww6" secondAttribute="leading" id="GZd-Jy-ldj"/>
+                            <constraint firstItem="cD1-bJ-1zT" firstAttribute="centerX" secondItem="HXf-Qt-cik" secondAttribute="centerX" id="L9H-2x-tRG"/>
                             <constraint firstItem="JNt-KL-yBq" firstAttribute="leading" secondItem="xY0-Yh-lv4" secondAttribute="leadingMargin" id="Mls-uW-yyW"/>
                             <constraint firstItem="JNt-KL-yBq" firstAttribute="top" secondItem="ezl-LY-kUr" secondAttribute="top" constant="20" id="RXg-ge-eWG"/>
                             <constraint firstItem="JNt-KL-yBq" firstAttribute="trailing" secondItem="xY0-Yh-lv4" secondAttribute="trailingMargin" id="c8I-If-jZr"/>
+                            <constraint firstItem="cD1-bJ-1zT" firstAttribute="centerY" secondItem="HXf-Qt-cik" secondAttribute="centerY" id="d4a-ou-boa"/>
                             <constraint firstItem="ght-23-ww6" firstAttribute="top" secondItem="JNt-KL-yBq" secondAttribute="bottom" constant="30" id="fWL-Sd-3qU"/>
                             <constraint firstItem="JNt-KL-yBq" firstAttribute="trailing" secondItem="ght-23-ww6" secondAttribute="trailing" id="i4B-zJ-WAW"/>
                             <constraint firstItem="ezl-LY-kUr" firstAttribute="bottom" secondItem="ght-23-ww6" secondAttribute="bottom" constant="15" id="xsB-Ka-JKy"/>
@@ -101,7 +111,9 @@
                     <navigationItem key="navigationItem" title="Traduction" id="G88-Kp-Zlr"/>
                     <connections>
                         <outlet property="LanguagepickerView" destination="rBy-4B-8Ta" id="qWj-SK-7Ti"/>
+                        <outlet property="activityIndicator" destination="HXf-Qt-cik" id="Bga-2i-JqF"/>
                         <outlet property="textToTranslate" destination="8QQ-9t-83q" id="4LB-Fd-oFc"/>
+                        <outlet property="translateButton" destination="cD1-bJ-1zT" id="wPN-y6-eRd"/>
                         <outlet property="translatedText" destination="5CU-un-8Tu" id="eWV-wv-6Bq"/>
                     </connections>
                 </viewController>
@@ -145,6 +157,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="l8Q-Gu-hGR">
+                                <rect key="frame" x="346.66666666666669" y="76" width="37" height="30"/>
+                            </activityIndicatorView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fond degrade" translatesAutoresizingMaskIntoConstraints="NO" id="f10-HN-512">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                             </imageView>
@@ -282,11 +297,14 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="f10-HN-512" secondAttribute="bottom" id="1ci-nZ-wxi"/>
                             <constraint firstItem="WVN-fL-Flp" firstAttribute="leading" secondItem="OwB-95-Lsy" secondAttribute="leading" constant="20" id="8A3-YK-Q5V"/>
+                            <constraint firstItem="l8Q-Gu-hGR" firstAttribute="centerX" secondItem="R2r-Ty-zeH" secondAttribute="centerX" id="CyK-GG-d8P"/>
                             <constraint firstItem="KTT-lC-zpi" firstAttribute="leading" secondItem="OwB-95-Lsy" secondAttribute="leading" id="LSw-V7-YmW"/>
                             <constraint firstItem="f10-HN-512" firstAttribute="leading" secondItem="OwB-95-Lsy" secondAttribute="leading" id="VhV-EU-3AJ"/>
                             <constraint firstItem="f10-HN-512" firstAttribute="top" secondItem="dy6-oa-rch" secondAttribute="top" id="Xkb-5g-MoA"/>
+                            <constraint firstItem="l8Q-Gu-hGR" firstAttribute="height" secondItem="R2r-Ty-zeH" secondAttribute="height" id="ZsD-Ue-htl"/>
                             <constraint firstItem="KTT-lC-zpi" firstAttribute="top" secondItem="WVN-fL-Flp" secondAttribute="bottom" constant="10" id="a7x-6s-KSd"/>
                             <constraint firstItem="D0a-kQ-EYa" firstAttribute="leading" secondItem="OwB-95-Lsy" secondAttribute="leading" constant="20" id="cE1-yp-hjA"/>
+                            <constraint firstItem="l8Q-Gu-hGR" firstAttribute="centerY" secondItem="R2r-Ty-zeH" secondAttribute="centerY" id="dzb-n4-Mzp"/>
                             <constraint firstItem="OwB-95-Lsy" firstAttribute="trailing" secondItem="KTT-lC-zpi" secondAttribute="trailing" id="gfh-xA-Bkc"/>
                             <constraint firstItem="OwB-95-Lsy" firstAttribute="trailing" secondItem="D0a-kQ-EYa" secondAttribute="trailing" constant="20" id="gl8-LY-Yho"/>
                             <constraint firstItem="D0a-kQ-EYa" firstAttribute="top" secondItem="OwB-95-Lsy" secondAttribute="top" constant="20" id="h1a-dC-Wmx"/>
@@ -304,10 +322,12 @@
                         <outlet property="NYdegree" destination="bpZ-uZ-YAE" id="nQE-or-NtM"/>
                         <outlet property="NYdescriptionWeather" destination="aHq-YX-LUc" id="JT3-oa-qHR"/>
                         <outlet property="NYiconWeather" destination="3oJ-F0-qI8" id="EiK-n4-Gdy"/>
+                        <outlet property="activityIndicator" destination="l8Q-Gu-hGR" id="wil-pA-mSl"/>
                         <outlet property="city" destination="acL-Ei-Ykc" id="kXJ-Lw-wfm"/>
                         <outlet property="degree" destination="OBN-W8-pld" id="WoG-oQ-E2w"/>
                         <outlet property="descriptionWeather" destination="SLX-Xp-67c" id="81u-8d-A8K"/>
                         <outlet property="iconWeather" destination="wxJ-cA-6P2" id="fry-Y0-aBf"/>
+                        <outlet property="searchCityButton" destination="R2r-Ty-zeH" id="M5b-au-4cK"/>
                         <outlet property="update" destination="jxa-hR-nLl" id="m0X-qe-Och"/>
                     </connections>
                 </viewController>
@@ -413,6 +433,7 @@
                                         <color key="backgroundColor" red="0.84977561239999999" green="0.99393063780000002" blue="0.76805526020000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="KTy-Tk-ish"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="dfY-cJ-bRC"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="TrebuchetMS-Italic" family="Trebuchet MS" pointSize="28"/>
                                         <state key="normal" title="Convertir">
@@ -457,11 +478,18 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="zPf-re-UBn">
+                                <rect key="frame" x="195.66666666666666" y="377.66666666666669" width="37" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="YX0-TO-qUJ"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xDp-99-p2H"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="zPf-re-UBn" firstAttribute="centerY" secondItem="Dgb-2s-xHJ" secondAttribute="centerY" id="9Rr-dK-3rM"/>
                             <constraint firstItem="2hx-vq-Uye" firstAttribute="leading" secondItem="xDp-99-p2H" secondAttribute="leading" constant="20" id="9ay-mT-UDu"/>
                             <constraint firstItem="2hx-vq-Uye" firstAttribute="top" secondItem="C04-rm-af7" secondAttribute="bottom" constant="10" id="H5m-3n-7Vb"/>
                             <constraint firstItem="C04-rm-af7" firstAttribute="leading" secondItem="xDp-99-p2H" secondAttribute="leading" constant="20" id="SZd-BV-vaU"/>
@@ -474,6 +502,7 @@
                             <constraint firstItem="xDp-99-p2H" firstAttribute="bottom" secondItem="GY2-4b-kCM" secondAttribute="bottom" id="qa9-D5-mdf"/>
                             <constraint firstItem="xDp-99-p2H" firstAttribute="bottom" secondItem="2hx-vq-Uye" secondAttribute="bottom" constant="10" id="rAb-In-6cA"/>
                             <constraint firstItem="GY2-4b-kCM" firstAttribute="top" secondItem="xDp-99-p2H" secondAttribute="top" id="uZh-Ed-buR"/>
+                            <constraint firstItem="zPf-re-UBn" firstAttribute="centerX" secondItem="Dgb-2s-xHJ" secondAttribute="centerX" id="xd8-o1-RVt"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="7LC-qf-iZo" appends="YES" id="qTf-TI-wvc"/>
@@ -481,6 +510,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Conversion" id="y31-b3-JfD"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="zPf-re-UBn" id="Xyj-Eq-psf"/>
+                        <outlet property="convertButton" destination="Dgb-2s-xHJ" id="Zgn-pq-t86"/>
                         <outlet property="downLabel" destination="U5h-Uw-DZX" id="8nJ-GP-XI3"/>
                         <outlet property="rateLabel" destination="2hx-vq-Uye" id="fO1-wj-uCs"/>
                         <outlet property="upTextField" destination="3Ar-hp-blC" id="X28-A5-hJj"/>

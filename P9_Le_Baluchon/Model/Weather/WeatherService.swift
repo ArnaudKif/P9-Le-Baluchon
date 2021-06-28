@@ -77,13 +77,13 @@ class WeatherService {
             fatalError("Could not create URL from components")
         }
         return url
-    }
+    } // end of selectedCityURL
 
     func createWheaterRequest(city: String) -> URLRequest {
         var request = URLRequest(url: selectedCityURL(cityName: city))
         request.httpMethod = "GET"
         return request
-    }
+    } // end of createWheaterRequest
 
     func convertDate(unix: Int) -> String {
 
@@ -95,8 +95,5 @@ class WeatherService {
         let dateString = dayTimePeriodFormatter.string(from: date)
         return dateString
     } // end of convertDate
-
-
-
 
 } // end of WeatherService

@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherViewController: UIViewController, UITextFieldDelegate {
 
-// MARK - Outlet
+    // MARK: - IBOutlet
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var iconWeather: UIImageView!
     @IBOutlet weak var degree: UILabel!
@@ -19,13 +19,15 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var NYiconWeather: UIImageView!
     @IBOutlet weak var NYdegree: UILabel!
     @IBOutlet weak var NYdescriptionWeather: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var searchCityButton: UIButton!
 
+// MARK: - viewDidLoad & presentAlert
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(presentAlert(notification:)), name: Notification.Name("alertDisplay"), object: nil)
-
+        activityIndicator.isHidden = true
         searchButtonTaped()
-
     } // end of viewDidLoad
 
     @objc private func presentAlert(notification : Notification) {
@@ -35,43 +37,9 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         let action  = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-    }
+    } // end of presentAlert
 
-
-
-    private func NYWeatherUpdate() {
-        WeatherService.shared.getWeather(city: "new york") { (true, searchWeather) in
-            if true, let NYWeather = searchWeather {
-                let NYdegreeInt = Int(NYWeather.main.temp)
-                self.NYdegree.text = "\(NYdegreeInt)°C"
-                self.NYiconWeather.image = UIImage(named: "\(NYWeather.weather[0].icon).png")
-                self.NYdescriptionWeather.text = NYWeather.weather[0].description
-            }
-        }
-    } // end of NYWeatherUpdate
-    
-
-
-    private func displayWeatherInfo(weather: AllWeather) {
-        let degreeInt = Int(weather.main.temp)
-        degree.text = "\(degreeInt)°C"
-        update.text = WeatherService.shared.convertDate(unix: weather.dt)
-        iconWeather.image = UIImage(named: "\(weather.weather[0].icon).png")
-        descriptionWeather.text = weather.weather[0].description
-
-    } // end fo displayWeatherInfo
-
-
-    @IBAction func searchButtonTaped() {
-        city.resignFirstResponder()
-        WeatherService.shared.getWeather(city: city.text!) { (true, searchWeather) in
-            if true, let resultWeather = searchWeather {
-                self.displayWeatherInfo(weather: resultWeather)
-                self.NYWeatherUpdate()
-            }
-        }
-    }
-
+    // MARK: - keyboard control
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         city.resignFirstResponder()
         searchButtonTaped()
@@ -83,4 +51,41 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         return true
     } // end of textFieldShouldReturn
 
-}
+    // MARK: - IBAction : button control
+    @IBAction func searchButtonTaped() {
+        toggleActivityIndicator(shown: true)
+        city.resignFirstResponder()
+        WeatherService.shared.getWeather(city: city.text!) { (true, searchWeather) in
+            self.toggleActivityIndicator(shown: false)
+            if true, let resultWeather = searchWeather {
+                self.displayWeatherInfo(weather: resultWeather)
+                self.NYWeatherUpdate()
+            }
+        }
+    }// end of searchButtonTaped
+
+    private func NYWeatherUpdate() {
+        WeatherService.shared.getWeather(city: "new york") { (true, searchWeather) in
+            if true, let NYWeather = searchWeather {
+                let NYdegreeInt = Int(NYWeather.main.temp)
+                self.NYdegree.text = "\(NYdegreeInt)°C"
+                self.NYiconWeather.image = UIImage(named: "\(NYWeather.weather[0].icon).png")
+                self.NYdescriptionWeather.text = NYWeather.weather[0].description
+            }
+        }
+    } // end of NYWeatherUpdate
+
+    private func displayWeatherInfo(weather: AllWeather) {
+        let degreeInt = Int(weather.main.temp)
+        degree.text = "\(degreeInt)°C"
+        update.text = WeatherService.shared.convertDate(unix: weather.dt)
+        iconWeather.image = UIImage(named: "\(weather.weather[0].icon).png")
+        descriptionWeather.text = weather.weather[0].description
+    } // end fo displayWeatherInfo
+
+    private func toggleActivityIndicator(shown: Bool) {
+        searchCityButton.isHidden = shown
+        activityIndicator.isHidden = !shown
+    } // end of toggleActivityIndicator
+
+} // end of WeatherViewController

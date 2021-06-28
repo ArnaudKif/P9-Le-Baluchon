@@ -22,15 +22,3 @@ struct Weather: Codable {
     let description, main, icon: String
     let id: Int
 }
-
-
-func convertDate(unix:Int) -> String {
-    let ns_date = NSDate(timeIntervalSince1970: TimeInterval(unix))
-    let date:Date = ns_date as Date
-    
-    let date_formatter: DateFormatter = DateFormatter()
-    date_formatter.dateFormat = "dd MM YYYY à HH:mm"
-    let date_string = date_formatter.string(from: date)
-    return date_string
-} // end of convertDate
-

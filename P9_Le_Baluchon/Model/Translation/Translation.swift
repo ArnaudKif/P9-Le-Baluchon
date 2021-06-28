@@ -9,16 +9,16 @@ import Foundation
 
 struct Translation: Codable {
     let data: Translations
-} // end of struct Translation
+}
 
 struct Translations: Codable {
     let translations: [Infos]
-} // end of struct Translations
+}
 
 struct Infos: Codable {
     let translatedText: String
     let detectedSourceLanguage: String
-} // end of struct Infos
+}
 
 let translateLanguage = ["Anglais",
                          "Français",

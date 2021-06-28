@@ -19,7 +19,6 @@ Bonus:
 
 Adding a bonus is mandatory. Here are the ones I have developed: 
 - Choice of the city for the weather
-- Change the currency conversion
 - Choice of the translation language
 
 -- WARNING --

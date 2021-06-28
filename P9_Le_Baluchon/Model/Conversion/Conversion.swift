@@ -13,7 +13,7 @@ struct CurrencyRate: Codable {
     let base: String
     let date: String
     let rates : Rates
-} // end of struct CurrencyRate
+}
 
 struct Rates: Codable {
     let USD: Double
@@ -23,4 +23,4 @@ struct Rates: Codable {
     let CNY: Double
     let GBP: Double
     let JPY: Double
-} // end of struct Rates
+}

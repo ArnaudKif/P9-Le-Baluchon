@@ -102,6 +102,6 @@ class TranslationService {
         return "en"
         }
 
-    }
+    } // end of selectedLanguage
 
 } // end of class TranslationService
