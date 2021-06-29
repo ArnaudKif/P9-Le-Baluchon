@@ -6,27 +6,107 @@
 //
 
 import XCTest
+@ testable import P9_Le_Baluchon
 
 class WeatherServiceCase: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var weather: WeatherService!
+
+    override func setUp() {
+        super.setUp()
+        weather = WeatherService(weatherSession: URLSessionFake(data: FakeResponseData.weatherCorrectData, response: FakeResponseData.responseOK, error: nil))
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    func testGetWeatherShouldPostFailedCallbackIfError() {
+        // Given
+        let weatherService = WeatherService(
+            weatherSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.weatherError))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        weatherService.getWeather(city: "New York") { (success, weatherResult) in
+            // Then
+            XCTAssertFalse(success)
+            XCTAssertNil(weatherResult)
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 0.01)
     }
+
+    func testGetWeatherShouldPostFailedCallbackIfNoData() {
+        // Given
+        let weatherService = WeatherService(
+            weatherSession: URLSessionFake(data: nil, response: nil, error: nil))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+
+        weatherService.getWeather(city: "New York") { (success, weatherResult) in
+            // Then
+            XCTAssertFalse(success)
+            XCTAssertNil(weatherResult)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+
+    func testGetWeatherShouldPostFailedCallbackIfIncorrectResponse() {
+        // Given
+        let weatherService = WeatherService(
+            weatherSession: URLSessionFake(data: FakeResponseData.weatherCorrectData, response: FakeResponseData.responseKO, error: nil))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+
+        weatherService.getWeather(city: "New York") { (success, weatherResult) in
+            // Then
+            XCTAssertFalse(success)
+            XCTAssertNil(weatherResult)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+
+    func testGetWeatherShouldPostFailedCallbackIfIncorrectData() {
+        // Given
+        let weatherService = WeatherService(
+            weatherSession: URLSessionFake(data: FakeResponseData.weatherIncorrectData, response: FakeResponseData.responseOK, error: nil))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+
+        weatherService.getWeather(city: "New York") { (success, weatherResult) in
+            // Then
+            XCTAssertFalse(success)
+            XCTAssertNil(weatherResult)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+
+    func testGetWeatherInEnglishShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
+        // Given
+        let weatherService = WeatherService(
+            weatherSession: URLSessionFake(data: FakeResponseData.weatherCorrectData, response: FakeResponseData.responseOK, error: nil))
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+
+        weatherService.getWeather(city: "New York") { (success, weatherResult) in
+            let temp = 23.61
+            let id = 800
+            // Then
+            XCTAssertTrue(success)
+            XCTAssertNotNil(weatherResult)
+            XCTAssertEqual(temp, weatherResult!.main.temp)
+            XCTAssertEqual(id, weatherResult!.weather[0].id)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+    func testDateConvert() {
+        let dt = 1624869947
+        let date = weather.convertDate(unix: dt)
+        let dateString = "28 juin 2021 à 10:45"
+        XCTAssertEqual(date, dateString)
+
+    }
+
 
 }

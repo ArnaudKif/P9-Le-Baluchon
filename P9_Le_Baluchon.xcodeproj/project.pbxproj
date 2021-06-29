@@ -26,7 +26,6 @@
 		96C0200D26789C6200380EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96C0200B26789C6200380EE9 /* Main.storyboard */; };
 		96C0200F26789C6400380EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C0200E26789C6400380EE9 /* Assets.xcassets */; };
 		96C0201226789C6400380EE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96C0201026789C6400380EE9 /* LaunchScreen.storyboard */; };
-		96C0201D26789C6400380EE9 /* P9_Le_BaluchonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0201C26789C6400380EE9 /* P9_Le_BaluchonTests.swift */; };
 		96C0202826789C6400380EE9 /* P9_Le_BaluchonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0202726789C6400380EE9 /* P9_Le_BaluchonUITests.swift */; };
 		96F7C28426847ED1007EC4AC /* xcuserdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7C28326847ED1007EC4AC /* xcuserdata.swift */; };
 		96F8B8092680F4B8004210E0 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F8B8082680F4B8004210E0 /* Translation.swift */; };
@@ -75,7 +74,6 @@
 		96C0201126789C6400380EE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96C0201326789C6400380EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96C0201826789C6400380EE9 /* P9_Le_BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P9_Le_BaluchonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		96C0201C26789C6400380EE9 /* P9_Le_BaluchonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P9_Le_BaluchonTests.swift; sourceTree = "<group>"; };
 		96C0201E26789C6400380EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96C0202326789C6400380EE9 /* P9_Le_BaluchonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P9_Le_BaluchonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C0202726789C6400380EE9 /* P9_Le_BaluchonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P9_Le_BaluchonUITests.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				9668E06B2689C365001365F3 /* Json Test */,
-				96C0201C26789C6400380EE9 /* P9_Le_BaluchonTests.swift */,
 				96C0201E26789C6400380EE9 /* Info.plist */,
 				9668E0652689C2DE001365F3 /* ConversionTestCase.swift */,
 				9668E0672689C2F5001365F3 /* TranslationServiceCase.swift */,
@@ -411,7 +408,6 @@
 				9668E0752689CFB8001365F3 /* URLSessionFake.swift in Sources */,
 				9668E0682689C2F5001365F3 /* TranslationServiceCase.swift in Sources */,
 				9668E0732689C5AD001365F3 /* FakeResponseData.swift in Sources */,
-				96C0201D26789C6400380EE9 /* P9_Le_BaluchonTests.swift in Sources */,
 				9668E0662689C2DE001365F3 /* ConversionTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
