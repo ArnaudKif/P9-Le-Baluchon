@@ -14,9 +14,11 @@ class ConversionService {
 
     private var task : URLSessionDataTask?
     private var conversionSession = URLSession(configuration: .default)
+    var rateArray: [Double] = [1.186669, 1.584021, 1.470579, 1.097681, 7.674545, 0.860127, 132.25722]
 
     init(conversionSession: URLSession) {
         self.conversionSession = conversionSession
+
     } // end of init
 
     private func sendAlertNotification(message : String) {
@@ -73,13 +75,22 @@ class ConversionService {
                 let searchRate: CurrencyRate = responseJSON
                 callback(true, searchRate)
                 print(searchRate)
+                ConversionService.shared.rateArray.removeAll()
+                ConversionService.shared.rateArray.append(searchRate.rates.USD)
+                ConversionService.shared.rateArray.append(searchRate.rates.AUD)
+                ConversionService.shared.rateArray.append(searchRate.rates.CAD)
+                ConversionService.shared.rateArray.append(searchRate.rates.CHF)
+                ConversionService.shared.rateArray.append(searchRate.rates.CNY)
+                ConversionService.shared.rateArray.append(searchRate.rates.GBP)
+                ConversionService.shared.rateArray.append(searchRate.rates.JPY)
             }
         }
         task?.resume()
     } // end of func getRates
 
-    func euroToDollarConvert(euroNumber: Double, rate: Double) -> String {
-        let dollarNumber: Double = euroNumber * rate
+    func euroToDollarConvert(euroNumber: Double, index: Int) -> String {
+        let finalRate: Double = ConversionService.shared.rateArray[index]
+        let dollarNumber: Double = euroNumber * finalRate
         let dollarString = doubleToInteger(currentDouble: dollarNumber)
         return dollarString
     } // end of func euroToDollarConvert
@@ -90,7 +101,6 @@ class ConversionService {
         formatter.usesGroupingSeparator = true
         formatter.groupingSeparator = " "
         formatter.maximumFractionDigits = 2
-
         let doubleAsString =  formatter.string(from: NSNumber(value: currentDouble))!
 
         return doubleAsString
@@ -117,5 +127,6 @@ class ConversionService {
         let date_string = "\(splitDate[2])-\(splitDate[1])-\(splitDate[0])"
         return date_string
     } // end of convertDate
+
 
 } // end of class ConversionService

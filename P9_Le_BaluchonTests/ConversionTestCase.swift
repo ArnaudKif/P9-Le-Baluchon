@@ -12,17 +12,36 @@ class ConversionTestCase: XCTestCase {
 
     var conversion: ConversionService!
 
+
     override func setUp() {
         super.setUp()
-        conversion = ConversionService(conversionSession: URLSessionFake(data: FakeResponseData.conversionCorrectData, response: FakeResponseData.responseOK, error: nil))
+        TestURLProtocol.loadingHandler = { request in
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            let data: Data? = FakeResponseData.conversionCorrectData
+            return (response, data, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [TestURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        conversion = ConversionService(conversionSession: session)
+
     }
 
 
 
     func testGetRatesShouldPostFailedCallbackIfError() {
         // Given
-        let conversionService = ConversionService(
-            conversionSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.conversionError))
+        TestURLProtocol.loadingHandler = { request in
+            let response: HTTPURLResponse = FakeResponseData.responseKO
+            let error: Error? = FakeResponseData.conversionError
+            let data: Data? = nil
+            return (response, data, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [TestURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let conversionService = ConversionService(conversionSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         conversionService.getRates { (success, searchRate) in
@@ -31,13 +50,21 @@ class ConversionTestCase: XCTestCase {
             XCTAssertNil(searchRate)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 1)
     }
 
     func testGetRatesShouldPostFailedCallbackIfNoData() {
-        // Given
-        let conversionService = ConversionService(
-            conversionSession: URLSessionFake(data: nil, response: nil, error: nil))
+        //        /// Given
+        TestURLProtocol.loadingHandler = { request in
+            let response: HTTPURLResponse = FakeResponseData.responseKO
+            let error: Error? = nil
+            let data: Data? = nil
+            return (response, data, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [TestURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let conversionService = ConversionService(conversionSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         conversionService.getRates { (success, searchRate) in
@@ -46,15 +73,24 @@ class ConversionTestCase: XCTestCase {
             XCTAssertNil(searchRate)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGetRatesShouldPostFailedCallbackIfIncorrectResponse() {
         // Given
-        let conversionService = ConversionService(
-            conversionSession: URLSessionFake(data: FakeResponseData.conversionCorrectData, response: FakeResponseData.responseKO, error: nil))
+        TestURLProtocol.loadingHandler = { request in
+            let response: HTTPURLResponse = FakeResponseData.responseKO
+            let error: Error? = nil
+            let data: Data? = FakeResponseData.conversionCorrectData
+            return (response, data, error)
+        }
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [TestURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let conversionService = ConversionService(conversionSession: session)
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
+
         conversionService.getRates { (success, searchRate) in
             // Then
             XCTAssertFalse(success)
@@ -64,12 +100,20 @@ class ConversionTestCase: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
 
-    func testGetQuoteShouldPostFailedCallbackIfIncorrectData() {
-        // Given
-        let conversionService = ConversionService(
-            conversionSession: URLSessionFake(data: FakeResponseData.conversionIncorrectData, response: FakeResponseData.responseOK, error: nil))
-        // When
+    func testGetRatesShouldPostFailedCallbackIfIncorrectData() {
+        /// Given
+        TestURLProtocol.loadingHandler = { request in
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            let data: Data? = FakeResponseData.conversionIncorrectData
+            return (response, data, error)
+        }
         let expectation = XCTestExpectation(description: "Wait for queue change.")
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [TestURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let conversionService = ConversionService(conversionSession: session)
+        // When
         conversionService.getRates { (success, searchRate) in
             // Then
             XCTAssertFalse(success)
@@ -79,18 +123,27 @@ class ConversionTestCase: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
 
-    func testGetQuoteShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
+    func testGetRatesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
         // Given
-        let conversionService = ConversionService(
-            conversionSession: URLSessionFake(data: FakeResponseData.conversionCorrectData, response: FakeResponseData.responseOK, error: nil))
-        // When
+        TestURLProtocol.loadingHandler = { request in
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            let data: Data? = FakeResponseData.conversionCorrectData
+            return (response, data, error)
+        }
         let expectation = XCTestExpectation(description: "Wait for queue change.")
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [TestURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        let conversionService = ConversionService(conversionSession: session)
+        // When
         conversionService.getRates { (success, searchRate) in
             let rate = 1.192897
+            let index = 0
             let date = "2021-06-28"
             let euroNumber = 2.0
-            let dollarNumber = "2,39"
-            let convert = self.conversion.euroToDollarConvert(euroNumber: euroNumber, rate: rate)
+            let dollarNumber = "2,37"
+            let convert = self.conversion.euroToDollarConvert(euroNumber: euroNumber, index: index)
             // Then
             XCTAssertTrue(success)
             XCTAssertNotNil(searchRate)
@@ -100,7 +153,7 @@ class ConversionTestCase: XCTestCase {
             XCTAssertEqual(convert, dollarNumber)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.07)
     }
 
     func testConvertUserEntrerConvertedInCorrectString() {
@@ -109,7 +162,12 @@ class ConversionTestCase: XCTestCase {
         XCTAssertEqual(result, stringTaped)
     }
 
+    func testErrorInFormatOfNumber() {
+        let doubleError = 0.0
+        let stringError = conversion.stringToDouble(textToTransform: "t2")
+        XCTAssertEqual(doubleError, stringError)
 
+    }
 
 
 } // enf of ConversionTestCase

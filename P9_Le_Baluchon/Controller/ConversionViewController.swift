@@ -15,12 +15,16 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var convertButton: UIButton!
+    @IBOutlet weak var ratePickerView: UIPickerView!
 
+//    var dailyRate
+    
 // MARK: - viewDidLoad & presentAlert
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(presentAlert(notification:)), name: Notification.Name("alertDisplay"), object: nil)
         activityIndicator.isHidden = true
+        self.rateLabel.text = "Appuyer sur Convertir pour mettre à jour le taux de conversion"
     } // end of viewDidLoad
 
     @objc func presentAlert(notification : Notification) {
@@ -53,14 +57,16 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
 
     private func updateResultLabelText() {
         toggleActivityIndicator(shown: true)
-        let euroNumber: Double = ConversionService.shared.stringToDouble(textToTransform: upTextField.text!)
-
         ConversionService.shared.getRates { (true, searchRate) in
-            self.toggleActivityIndicator(shown: false)
-            self.downLabel.text =  "\(ConversionService.shared.euroToDollarConvert(euroNumber: euroNumber,rate: searchRate!.rates.USD))"
             let date = ConversionService.shared.convertDate(date: searchRate!.date)
-            let rate = searchRate!.rates.USD
-            self.rateLabel.text = "Taux de conversion : 1€ = \(rate)$ \nMise à jour le \(date)"
+            let euroNumber: Double = ConversionService.shared.stringToDouble(textToTransform: self.upTextField.text!)
+
+            let indexRate = self.ratePickerView.selectedRow(inComponent: 0)
+            self.downLabel.text =  "\(ConversionService.shared.euroToDollarConvert(euroNumber: euroNumber,index: indexRate))"
+            let rate = ConversionService.shared.rateArray[indexRate]
+        let monnaie = rateChoice[indexRate]
+            self.rateLabel.text = "Taux de conversion : \n1€ = \(rate) \(monnaie) \nMise à jour le \(date)"
+            self.toggleActivityIndicator(shown: false)
         }
     } // end of updateResultLabelText
 
@@ -70,3 +76,23 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     } // end of toggleActivityIndicator
 
 } // end of ConversionViewController
+
+// MARK: - PickerView Components
+extension ConversionViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return rateChoice.count
+    }
+
+    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return rateChoice[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        updateResultLabelText()
+        }
+}

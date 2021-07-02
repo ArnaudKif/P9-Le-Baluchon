@@ -58,7 +58,7 @@ class TranslationService {
             }
         }
         task?.resume()
-    } // end of func Gettranslation
+    } // end of func GetTranslation
 
     private func translateURL(target: String,textToTranslate: String) -> URL {
         var urlComponents = URLComponents()
