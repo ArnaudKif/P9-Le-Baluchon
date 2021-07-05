@@ -18,7 +18,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ratePickerView: UIPickerView!
 
 //    var dailyRate
-    
+
 // MARK: - viewDidLoad & presentAlert
     override func viewDidLoad() {
         super.viewDidLoad()

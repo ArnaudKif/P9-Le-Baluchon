@@ -27,7 +27,7 @@ class TranslationServiceCase: XCTestCase {
         let session = URLSession(configuration: configuration)
         translation = TranslationService(translationSession: session)
     }
-
+    
     // MARK: - Network call tests
     func testGetTranslationShouldPostFailedCallbackIfError() {
         // Given

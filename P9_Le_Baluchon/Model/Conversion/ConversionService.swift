@@ -8,7 +8,7 @@
 import Foundation
 
 class ConversionService {
-    
+
     // MARK: - Singleton pattern
     static var shared = ConversionService()
     private init() {}

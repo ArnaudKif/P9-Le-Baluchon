@@ -26,7 +26,7 @@ class WeatherServiceCase: XCTestCase {
         let session = URLSession(configuration: configuration)
         weather = WeatherService(weatherSession: session)
     }
-
+    
     // MARK: - Network call tests
     func testGetWeatherShouldPostFailedCallbackIfError() {
         // Given

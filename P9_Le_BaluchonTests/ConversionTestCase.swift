@@ -152,7 +152,7 @@ class ConversionTestCase: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
-
+    
     // MARK: - conversion function tests
     func testConvertUserEntrerConvertedInCorrectString() {
         let result = 1.5

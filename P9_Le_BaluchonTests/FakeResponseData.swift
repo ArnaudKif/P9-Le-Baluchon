@@ -32,7 +32,6 @@ class FakeResponseData  {
     static let weatherIncorrectData = "erreur".data(using: .utf8)!
     static let translationIncorrectData = "erreur".data(using: .utf8)!
 
-
     // MARK: - Response
     static let responseOK = HTTPURLResponse(
         url: URL(string: "https://openclassrooms.com")!,
@@ -41,7 +40,6 @@ class FakeResponseData  {
     static let responseKO = HTTPURLResponse(
         url: URL(string: "https://openclassrooms.com")!,
         statusCode: 500, httpVersion: nil, headerFields: [:])!
-
 
     // MARK: - Error
     class ConversionError: Error {}
