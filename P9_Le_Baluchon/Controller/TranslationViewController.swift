@@ -9,10 +9,9 @@ import UIKit
 
 class TranslationViewController: UIViewController, UITextFieldDelegate {
 
-// MARK: - IBOutlet
+    // MARK: - IBOutlet
     @IBOutlet weak var textToTranslate: UITextField!
     @IBOutlet weak var translatedText: UILabel!
-
     @IBOutlet weak var translateButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var LanguagepickerView: UIPickerView!
@@ -24,14 +23,12 @@ class TranslationViewController: UIViewController, UITextFieldDelegate {
         activityIndicator.isHidden = true
     }
 
-    @objc func presentAlert(notification : Notification) {
+    @objc private func presentAlert(notification : Notification) {
         guard let alertInfo = notification.userInfo!["message"] as? String else { return }
-
         let alert = UIAlertController(title: "Erreur", message: alertInfo, preferredStyle: .alert)
         let action  = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-//       textToTranslate.resignFirstResponder()
     }
 
     // MARK: - keyboard control
@@ -83,5 +80,5 @@ extension TranslationViewController: UIPickerViewDataSource, UIPickerViewDelegat
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         translateButtonTaped()
-        }
+    }
 }

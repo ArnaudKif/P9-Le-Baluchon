@@ -10,9 +10,11 @@ import Foundation
 
 class WeatherService {
 
+    // MARK: - Singleton pattern
     static var shared = WeatherService()
     private init() {}
 
+    // MARK: - Attribute & init
     private var task : URLSessionDataTask?
     private var weatherSession = URLSession(configuration: .default)
 
@@ -20,12 +22,13 @@ class WeatherService {
         self.weatherSession = weatherSession
     }
 
+    // MARK: - Sending alert notification
     private func sendAlertNotification(message : String) {
         let alertName = Notification.Name("alertDisplay")
         NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
     } // end of sendAlertNotification
 
-
+    // MARK: - recovery and processing of weather
     func getWeather(city: String, callback: @escaping (Bool, AllWeather?) -> Void) {
         let resquest = createWheaterRequest(city: city)
 
@@ -62,6 +65,7 @@ class WeatherService {
         task?.resume()
     } // end fo GetWeather
 
+    // MARK: - URL & Request configuration
     private func selectedCityURL(cityName: String) -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -85,8 +89,8 @@ class WeatherService {
         return request
     } // end of createWheaterRequest
 
+    // MARK: - date conversion
     func convertDate(unix: Int) -> String {
-
         let date = Date(timeIntervalSince1970: TimeInterval(unix))
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.locale = Locale(identifier: "fr_FR")

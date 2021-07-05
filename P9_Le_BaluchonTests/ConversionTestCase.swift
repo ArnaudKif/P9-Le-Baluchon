@@ -12,7 +12,6 @@ class ConversionTestCase: XCTestCase {
 
     var conversion: ConversionService!
 
-
     override func setUp() {
         super.setUp()
         TestURLProtocol.loadingHandler = { request in
@@ -25,11 +24,9 @@ class ConversionTestCase: XCTestCase {
         configuration.protocolClasses = [TestURLProtocol.self]
         let session = URLSession(configuration: configuration)
         conversion = ConversionService(conversionSession: session)
-
     }
 
-
-
+    // MARK: - Network call tests
     func testGetRatesShouldPostFailedCallbackIfError() {
         // Given
         TestURLProtocol.loadingHandler = { request in
@@ -153,9 +150,10 @@ class ConversionTestCase: XCTestCase {
             XCTAssertEqual(convert, dollarNumber)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.07)
+        wait(for: [expectation], timeout: 1)
     }
 
+    // MARK: - conversion function tests
     func testConvertUserEntrerConvertedInCorrectString() {
         let result = 1.5
         let stringTaped = conversion.stringToDouble(textToTransform: "1,5")
@@ -168,6 +166,5 @@ class ConversionTestCase: XCTestCase {
         XCTAssertEqual(doubleError, stringError)
 
     }
-
 
 } // enf of ConversionTestCase

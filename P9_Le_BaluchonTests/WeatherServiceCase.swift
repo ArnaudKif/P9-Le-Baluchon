@@ -25,9 +25,9 @@ class WeatherServiceCase: XCTestCase {
         configuration.protocolClasses = [TestURLProtocol.self]
         let session = URLSession(configuration: configuration)
         weather = WeatherService(weatherSession: session)
-//        weather = WeatherService(weatherSession: URLSessionFake(configuration: .ephemeral, data: FakeResponseData.weatherCorrectData, response: FakeResponseData.responseOK, error: nil))
     }
 
+    // MARK: - Network call tests
     func testGetWeatherShouldPostFailedCallbackIfError() {
         // Given
         TestURLProtocol.loadingHandler = { request in
@@ -146,6 +146,8 @@ class WeatherServiceCase: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
+
+    // MARK: - conversion function tests
     func testDateConvert() {
         let dt = 1624869947
         let date = weather.convertDate(unix: dt)

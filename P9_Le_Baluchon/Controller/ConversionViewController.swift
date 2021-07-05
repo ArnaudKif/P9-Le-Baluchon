@@ -27,7 +27,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         self.rateLabel.text = "Appuyer sur Convertir pour mettre à jour le taux de conversion"
     } // end of viewDidLoad
 
-    @objc func presentAlert(notification : Notification) {
+    @objc private func presentAlert(notification : Notification) {
         guard let alertInfo = notification.userInfo!["message"] as? String else { return }
 
         let alert = UIAlertController(title: "Erreur", message: alertInfo, preferredStyle: .alert)
@@ -37,7 +37,6 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     } // end of presentAlert
 
 // MARK: - keyboard control
-
     internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         upTextField.resignFirstResponder()
         updateResultLabelText()

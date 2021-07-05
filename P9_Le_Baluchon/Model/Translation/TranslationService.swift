@@ -9,9 +9,11 @@ import Foundation
 
 class TranslationService {
 
+    // MARK: - Singleton pattern
     static var shared = TranslationService()
     private init() {}
 
+    // MARK: - Attribute & init
     private var task : URLSessionDataTask?
     private var translationSession = URLSession(configuration: .default)
 
@@ -19,12 +21,13 @@ class TranslationService {
         self.translationSession = translationSession
     } // end of init
 
+    // MARK: - Sending alert notification
     private func sendAlertNotification(message : String) {
         let alertName = Notification.Name("alertDisplay")
         NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
     } // end of sendAlertNotification
 
-
+    // MARK: - recovery and processing of translation
     func getTranslation(languageIndex: Int,textToTranslate: String, callback: @escaping (Bool, Translation?) -> Void) {
 
         let language = selectedLanguage(index: languageIndex)
@@ -60,6 +63,7 @@ class TranslationService {
         task?.resume()
     } // end of func GetTranslation
 
+    // MARK: - URL & Request configuration
     private func translateURL(target: String,textToTranslate: String) -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -92,14 +96,14 @@ class TranslationService {
             language = "fr"
             return language
         case 2 :
-        language = "de"
+            language = "de"
             return language
         case 3 :
             language = "es"
             return language
         default:
             sendAlertNotification(message: "erreur dans le choix de la langue")
-        return "en"
+            return "en"
         }
 
     } // end of selectedLanguage

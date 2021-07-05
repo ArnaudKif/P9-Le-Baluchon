@@ -28,6 +28,7 @@ class TranslationServiceCase: XCTestCase {
         translation = TranslationService(translationSession: session)
     }
 
+    // MARK: - Network call tests
     func testGetTranslationShouldPostFailedCallbackIfError() {
         // Given
         TestURLProtocol.loadingHandler = { request in
@@ -150,6 +151,5 @@ class TranslationServiceCase: XCTestCase {
         }
         wait(for: [expectation], timeout: 0.01)
     }
-
 
 }

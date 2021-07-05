@@ -8,24 +8,27 @@
 import Foundation
 
 class ConversionService {
-
+    
+    // MARK: - Singleton pattern
     static var shared = ConversionService()
     private init() {}
-
+    
+    // MARK: - Attribute & init
     private var task : URLSessionDataTask?
     private var conversionSession = URLSession(configuration: .default)
     var rateArray: [Double] = [1.186669, 1.584021, 1.470579, 1.097681, 7.674545, 0.860127, 132.25722]
-
+    
     init(conversionSession: URLSession) {
         self.conversionSession = conversionSession
-
     } // end of init
-
+    
+    // MARK: - Sending alert notification
     private func sendAlertNotification(message : String) {
         let alertName = Notification.Name("alertDisplay")
         NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
     } // end of sendAlertNotification
-
+    
+    // MARK: - URL & Request configuration
     private func conversionURL() -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
@@ -40,13 +43,14 @@ class ConversionService {
         }
         return url
     }// end of func conversionURL
-
+    
     private func createConversionRequest() -> URLRequest {
         var request = URLRequest(url: conversionURL())
         request.httpMethod = "GET"
         return request
     }// end of func createConversionRequest
-
+    
+    // MARK: - recovery and processing of rates
     func getRates(callback: @escaping (Bool, CurrencyRate?) -> Void) {
         let resquest = createConversionRequest()
         task?.cancel()
@@ -87,14 +91,15 @@ class ConversionService {
         }
         task?.resume()
     } // end of func getRates
-
+    
+    // MARK: - data conversion and management
     func euroToDollarConvert(euroNumber: Double, index: Int) -> String {
         let finalRate: Double = ConversionService.shared.rateArray[index]
         let dollarNumber: Double = euroNumber * finalRate
         let dollarString = doubleToInteger(currentDouble: dollarNumber)
         return dollarString
     } // end of func euroToDollarConvert
-
+    
     private func doubleToInteger(currentDouble: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -102,17 +107,16 @@ class ConversionService {
         formatter.groupingSeparator = " "
         formatter.maximumFractionDigits = 2
         let doubleAsString =  formatter.string(from: NSNumber(value: currentDouble))!
-
         return doubleAsString
     } // end of doubleToInteger
-
+    
     func stringToDouble(textToTransform: String) -> Double {
         let formatter = NumberFormatter()
-
+        
         if textToTransform.firstIndex(of: ",") != nil {
             formatter.decimalSeparator = ","
         } else { formatter.decimalSeparator = "." }
-
+        
         let grade = formatter.number(from: textToTransform)
         if let doubleGrade = grade?.doubleValue {
             return doubleGrade
@@ -121,12 +125,12 @@ class ConversionService {
             return 0.0
         }
     } // end of func stringToDouble
-
+    
     func convertDate(date: String) -> String {
         let splitDate:[String] = date.split(separator: "-").map { "\($0)"}
         let date_string = "\(splitDate[2])-\(splitDate[1])-\(splitDate[0])"
         return date_string
     } // end of convertDate
-
-
+    
+    
 } // end of class ConversionService
