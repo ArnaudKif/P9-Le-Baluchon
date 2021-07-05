@@ -20,6 +20,7 @@ Bonus:
 Adding a bonus is mandatory. Here are the ones I have developed: 
 - Choice of the city for the weather
 - Choice of the translation language
+- choice of the conversion currency
 
 -- WARNING --
 for the project to work, you must add your own API access keys in the following constants: 
