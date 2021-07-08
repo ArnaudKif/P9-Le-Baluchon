@@ -9,6 +9,9 @@ import UIKit
 
 class TranslationViewController: UIViewController, UITextFieldDelegate {
 
+    // MARK: - PickerView elements
+    let translateLanguage = ["Anglais", "Français", "Allemand", "Espagnol"]
+
     // MARK: - IBOutlet
     @IBOutlet weak var textToTranslate: UITextField!
     @IBOutlet weak var translatedText: UILabel!

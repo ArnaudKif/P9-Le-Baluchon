@@ -55,9 +55,7 @@ class WeatherService {
                     return
                 }
                 print("JSON OK")
-
                 let searchWheather: AllWeather = responseJSON
-
                 callback(true, searchWheather)
                 print(searchWheather)
             }

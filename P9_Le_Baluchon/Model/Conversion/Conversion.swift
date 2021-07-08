@@ -24,12 +24,3 @@ struct Rates: Codable {
     let GBP: Double
     let JPY: Double
 }
-
-let rateChoice = ["$ US",
-                  "$ AUS",
-                  "$ CA",
-                  "F CH",
-                  "¥ CN",
-                  "£ GB",
-                  "¥ JP"
-                 ]

@@ -9,6 +9,9 @@ import UIKit
 
 class ConversionViewController: UIViewController, UITextFieldDelegate {
 
+    // MARK: - PickerView elements
+    let rateChoice = ["$ US", "$ AUS", "$ CA", "F CH", "¥ CN", "£ GB", "¥ JP"]
+
 // MARK: - IBOutlet
     @IBOutlet weak var upTextField: UITextField!
     @IBOutlet weak var downLabel: UILabel!
@@ -16,8 +19,6 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var convertButton: UIButton!
     @IBOutlet weak var ratePickerView: UIPickerView!
-
-//    var dailyRate
 
 // MARK: - viewDidLoad & presentAlert
     override func viewDidLoad() {
@@ -59,11 +60,10 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         ConversionService.shared.getRates { (true, searchRate) in
             let date = ConversionService.shared.convertDate(date: searchRate!.date)
             let euroNumber: Double = ConversionService.shared.stringToDouble(textToTransform: self.upTextField.text!)
-
             let indexRate = self.ratePickerView.selectedRow(inComponent: 0)
             self.downLabel.text =  "\(ConversionService.shared.euroToDollarConvert(euroNumber: euroNumber,index: indexRate))"
             let rate = ConversionService.shared.rateArray[indexRate]
-        let monnaie = rateChoice[indexRate]
+            let monnaie = self.rateChoice[indexRate]
             self.rateLabel.text = "Taux de conversion : \n1€ = \(rate) \(monnaie) \nMise à jour le \(date)"
             self.toggleActivityIndicator(shown: false)
         }

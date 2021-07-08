@@ -29,7 +29,9 @@ class TranslationService {
 
     // MARK: - recovery and processing of translation
     func getTranslation(languageIndex: Int,textToTranslate: String, callback: @escaping (Bool, Translation?) -> Void) {
-
+        if textToTranslate == "" {
+            self.sendAlertNotification(message: "Veuillez remplir le texte à traduire")
+        }
         let language = selectedLanguage(index: languageIndex)
         let resquest = createTranslationRequest(target: language, text: textToTranslate)
         task?.cancel()
@@ -105,7 +107,6 @@ class TranslationService {
             sendAlertNotification(message: "erreur dans le choix de la langue")
             return "en"
         }
-
     } // end of selectedLanguage
 
 } // end of class TranslationService
