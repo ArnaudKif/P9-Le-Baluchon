@@ -30,7 +30,7 @@ class WeatherService {
 
     // MARK: - recovery and processing of weather
     func getWeather(city: String, callback: @escaping (Bool, AllWeather?) -> Void) {
-        let resquest = createWheaterRequest(city: city)
+        let resquest = createWeatherRequest(city: city)
 
         task?.cancel()
         task = weatherSession.dataTask(with: resquest) { (data, response, error) in
@@ -81,11 +81,11 @@ class WeatherService {
         return url
     } // end of selectedCityURL
 
-    func createWheaterRequest(city: String) -> URLRequest {
+    func createWeatherRequest(city: String) -> URLRequest {
         var request = URLRequest(url: selectedCityURL(cityName: city))
         request.httpMethod = "GET"
         return request
-    } // end of createWheaterRequest
+    } // end of createWeatherRequest
 
     // MARK: - date conversion
     func convertDate(unix: Int) -> String {
