@@ -51,7 +51,7 @@ class ConversionTestCase: XCTestCase {
     }
 
     func testGetRatesShouldPostFailedCallbackIfNoData() {
-        //        /// Given
+        // Given
         TestURLProtocol.loadingHandler = { request in
             let response: HTTPURLResponse = FakeResponseData.responseKO
             let error: Error? = nil
