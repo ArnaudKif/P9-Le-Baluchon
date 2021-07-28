@@ -152,4 +152,34 @@ class TranslationServiceCase: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
 
+
+    func testIfselectedLanguageIsFrThenReturnIsFr () {
+        let pickerIndex = 1
+        let language = translation.selectedLanguage(index: pickerIndex)
+
+        XCTAssertEqual(language, "fr")
+    }
+    func testIfselectedLanguageIsDeThenReturnIsDe () {
+        let pickerIndex = 2
+        let language = translation.selectedLanguage(index: pickerIndex)
+
+        XCTAssertEqual(language, "de")
+    }
+
+    func testIfselectedLanguageIsEsThenReturnIsEs () {
+        let pickerIndex = 3
+        let language = translation.selectedLanguage(index: pickerIndex)
+
+        XCTAssertEqual(language, "es")
+    }
+
+    func testIfselectedLanguageIsErrorThenReturnIsEn () {
+        let pickerIndex = 4
+        let language = translation.selectedLanguage(index: pickerIndex)
+
+        XCTAssertEqual(language, "en")
+    }
+
+
+
 }
