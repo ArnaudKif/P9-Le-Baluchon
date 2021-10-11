@@ -31,3 +31,7 @@ for the project to work, you must add your own API access keys in the following 
     let openweatherApiIdKey = "YourOpenweatherAPIIdKey"
 
 
+![Simulator Screen Shot - iPhone 11 - 2021-06-29 at 15 25 37](https://user-images.githubusercontent.com/78606895/136787991-cd37f106-c0d4-47f1-914d-698dabb72a2d.png)
+![Simulator Screen Shot - iPhone 11 - 2021-07-05 at 09 56 00](https://user-images.githubusercontent.com/78606895/136788053-99753781-213f-40c7-a496-68a160d64ae7.png)
+![Simulator Screen Shot - iPhone 11 - 2021-07-05 at 09 53 52](https://user-images.githubusercontent.com/78606895/136788109-50062ad7-9a30-4326-aaab-d786994f192c.png)
+![Simulator Screen Shot - iPhone 11 - 2021-07-05 at 09 55 30](https://user-images.githubusercontent.com/78606895/136788139-fd8effe0-0158-46c8-b82f-68f2ec18e94f.png)
